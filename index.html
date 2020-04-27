@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabeltann bingo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #3f3f3f;
+            display: grid;
+            height: 100%;
+            padding: 2rem;
+        }
+
+        main {
+            background: #040404;
+            padding: 2rem 2rem 4rem;
+            box-shadow: 0px 0px 24px 6px rgba(0,0,0,0.75);
+            width: fit-content;
+            border-radius: 0.75rem;
+            margin: auto;
+        }
+
+        .logo {
+            width: 25rem;
+            margin: 0 auto;
+            display: block;
+            margin-bottom: 2rem;
+        }
+        
+        #bord {
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 1rem;
+        }
+            
+        .square {
+            display: block;
+            border-radius: 1rem;
+            background-color: #fff;
+            border: 0.3rem solid white;
+            padding: 0.25rem;
+            -webkit-appearance: none;
+            width: 6rem;
+            height: 6rem;
+            background-size: 90%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .square:focus {
+            outline: none;
+        }
+
+        .square:checked {
+            border-color: #a00000;
+        }
+
+        .square--kaptein-sabeltann {
+            background-image: url(img/sabeltann.png);
+        }
+        .square--pinky {
+            background-image: url(img/pinky.png);
+        }
+        .square--langemann {
+            background-image: url(img/langemann.png);
+        }
+        .square--skull-and-bones {
+            background-image: url(img/skull.png);
+        }
+        .square--skalken {
+            background-image: url(img/skalken.png);
+        }
+        .square--sunniva {
+            background-image: url(img/sunniva.png);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <img class="logo" src="img/logo.png" />
+
+        <table id="bord">
+            <tr>
+                <td><input id="toggle-0-0" class="square" type="checkbox"/></td>
+                <td><input id="toggle-0-1" class="square" type="checkbox"/></td>
+                <td><input id="toggle-0-2" class="square" type="checkbox"/></td>
+                <td><input id="toggle-0-3" class="square" type="checkbox"/></td>
+            </tr>
+            <tr>
+                <td><input id="toggle-1-0" class="square" type="checkbox"/></td>
+                <td><input id="toggle-1-1" class="square" type="checkbox"/></td>
+                <td><input id="toggle-1-2" class="square" type="checkbox"/></td>
+                <td><input id="toggle-1-3" class="square" type="checkbox"/></td>
+            </tr>
+            <tr>
+                <td><input id="toggle-2-0" class="square" type="checkbox"/></td>
+                <td><input id="toggle-2-1" class="square" type="checkbox"/></td>
+                <td><input id="toggle-2-2" class="square" type="checkbox"/></td>
+                <td><input id="toggle-2-3" class="square" type="checkbox"/></td>
+            </tr>
+            <tr>
+                <td><input id="toggle-3-0" class="square" type="checkbox"/></td>
+                <td><input id="toggle-3-1" class="square" type="checkbox"/></td>
+                <td><input id="toggle-3-2" class="square" type="checkbox"/></td>
+                <td><input id="toggle-3-3" class="square" type="checkbox"/></td>
+            </tr>
+        </table>
+    </main>
+
+    <script>
+        function setItem(key, value) {
+            try {
+                sessionStorage.setItem(key, JSON.stringify(value))
+            } catch (error) {
+                console.error('Gikk i dass git..', error)
+            }
+
+            return value
+        }
+        
+        function getItem(key) {
+            try {
+                const item = sessionStorage.getItem(key)
+                if (item) return JSON.parse(item)
+            } catch (error) {
+                console.error('Gikk i dass git..', error)
+            }
+        }
+        
+        const values = [
+            'kaptein-sabeltann',
+            'pinky',
+            'langemann',
+            'skull-and-bones',
+            'skalken',
+            'sunniva',
+        ]
+
+        function getRandomValue() {
+            const index = Math.floor(Math.random() * values.length);
+            return values[index]
+        }
+
+        function generateBord(width = 4, height = 4) {
+            return Array(height).fill().map(() => Array(width).fill().map(() => getRandomValue()))
+        }
+        
+        function generateChecks(width = 4, height = 4) {
+            return Array(height).fill().map(() => Array(width).fill().map(() => false))
+        }
+
+        function getCoords(el) {
+            const [, row, column] = /(\d)-(\d)$/.exec(el.id) || []
+            return [Number(row), Number(column)]
+        }
+
+        function getChecks() {
+            return getItem('check') || setItem('check', generateChecks())
+        }
+
+        function getBord() {
+            return getItem('bord') || setItem('bord', generateBord())
+        }
+
+        function hydrateElement(el, value, checked) {
+            el.classList.add(`square--${value}`)
+            el.checked = checked
+            el.title = value
+        }
+
+        function hydrate(bord, checks) {
+            const table = document.getElementById('bord')
+            const squares = table.querySelectorAll('input.square')
+
+            Array.from(squares).forEach(el => {
+                const [row, column] = getCoords(el)
+                const value = bord[row][column]
+                const checked = checks[row][column]
+
+                hydrateElement(el, value, checked)
+            })
+
+            table.addEventListener('change', event => {
+                const [row, column] = getCoords(event.target)
+                checks[row][column] = event.target.checked
+                setItem('check', checks)
+            })
+        }
+
+        hydrate(getBord(), getChecks())
+    </script>
+</body>
+</html>
