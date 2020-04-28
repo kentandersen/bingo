@@ -12,23 +12,18 @@
         body {
             background-color: #3f3f3f;
             display: grid;
-            height: 100%;
-            padding: 2rem 0;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0 1rem;
         }
 
         main {
             background: #040404;
             padding: 2rem 0.5rem 4rem;
-            box-shadow: 0px 0px 24px 6px rgba(0,0,0,0.75);
+            box-shadow: 0 0 1.5rem 0.375rem rgba(0,0,0,0.75);
             max-width: 30rem;
             border-radius: 0.75rem;
             margin: auto;
-        }
-
-        @media (min-width: 25em) {
-            main {
-                padding: 2rem 2rem 4rem;
-            }
         }
 
         .logo {
@@ -41,28 +36,29 @@
         #bord {
             table-layout: fixed;
             border-collapse: separate;
-            border-spacing: 1rem;
             width: 100%;
         }
         
         #bord td {
             width: 25%;
+            text-align: center;
         }
 
         .square {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            display: block;
+            display: inline-block;
+            border: 0;
             border-radius: 1rem;
-            background-color: #fff;
-            border: 0.3rem solid white;
-            padding: 0.25rem;
-            width: 100%;
-            height: 5rem;
-            background-size: 90%;
+            background-color: #ffffff;
+            width: 4rem;
+            height: 4rem;
+            background-size: 80%;
             background-position: center;
             background-repeat: no-repeat;
+            transition: box-shadow 0.3s,
+                        background-color 0.3s;
         }
 
         .square:focus {
@@ -70,26 +66,66 @@
         }
 
         .square:checked {
-            border-color: #a00000;
+            box-shadow: inset 0 0 0 0.3rem #a00000;
         }
 
         .square--kaptein-sabeltann {
             background-image: url(img/sabeltann.png);
         }
+        
+        .square--kaptein-sabeltann:checked {
+            background-color: #313131;
+        }
+        
         .square--pinky {
             background-image: url(img/pinky.png);
         }
+        
+        .square--pinky:checked {
+            background-color: #4f577d;
+        }
+
         .square--langemann {
             background-image: url(img/langemann.png);
         }
+        
+        .square--langemann:checked {
+            background-color: #86554f;
+        }
+        
         .square--skull-and-bones {
             background-image: url(img/skull.png);
         }
+        
+        .square--skull-and-bones:checked {
+            background-color: #a59189;
+        }
+        
         .square--skalken {
             background-image: url(img/skalken.png);
         }
+        
+        .square--skalken:checked {
+            background-color: #4e5377;
+        }
+        
         .square--sunniva {
             background-image: url(img/sunniva.png);
+        }
+        
+        .square--sunniva:checked {
+            background-color: #a25858;
+        }
+
+        @media (min-width: 28em) {
+            main {
+                padding: 2rem 2rem 4rem;
+            }
+
+            .square {
+                width: 5rem;
+                height: 5rem;
+            }
         }
     </style>
 </head>
