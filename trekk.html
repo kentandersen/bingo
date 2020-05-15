@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    
+        body {
+            background-color: #3f3f3f;
+            display: grid;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0 1rem;
+        }
+    
+        main {
+            background: #181c56;
+            padding: 2rem 0.5rem 2rem;
+            box-shadow: 0 0 1.5rem 0.375rem rgba(24, 28, 86, 0.75);
+            max-width: 40rem;
+            border-radius: 0.75rem;
+            margin: auto;
+        }
+        
+        #pixelate {
+            width: 512px;
+            height: 512px;
+            display: block;
+        }
+
+        #name {
+            font-family: Futura, Arial, sans-serif;
+            text-align: center;
+            font-size: 3rem;
+            color: #fff;
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        #draw {
+            border: 0;
+            background-color: #808080;
+            padding: 0.5rem 1rem;
+            display: block;
+            margin: 1rem auto 0;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <figure>
+            <canvas id="pixelate"></canvas>
+            <figcaption id="name"></figcaption>
+        </figure>
+        <button id="draw">Trekk</button>
+    </main>
+
+    <script type="module">
+        import values, { getRandomValue } from './values.js'
+        import createPixelation from './src/Pixelate.js'
+        import shuffle from './src/shuffelLetters.js'
+        
+        const drawButtonEl = document.getElementById("draw")
+        const pixelateEl = document.getElementById("pixelate");
+        const nameEl = document.getElementById('name');
+        
+        const pixelate = createPixelation(pixelateEl)
+
+        async function createSuspence({ name, img }) {
+            const stop = pixelate(img)
+            await shuffle(nameEl, name)
+            stop()
+        }
+        
+        drawButtonEl.addEventListener('click', () => {
+            const randomValue = getRandomValue()
+            createSuspence(randomValue)
+        });
+    </script>
+</body>
+</html>
