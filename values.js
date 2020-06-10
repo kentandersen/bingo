@@ -1,10 +1,5 @@
 const values = [
     {
-        name: 'Aryan',
-        thumb: './img/aryan-thumb.jpg',
-        img: './img/aryan.jpg',
-    },
-    {
         name: 'Calle',
         thumb: './img/calle-thumb.png',
         img: './img/calle.png',
@@ -13,11 +8,6 @@ const values = [
         name: 'Caroline',
         thumb: './img/caroline-thumb.jpg',
         img: './img/caroline.jpg',
-    },
-    {
-        name: 'Christian',
-        thumb: './img/christian-thumb.jpg',
-        img: './img/christian.jpg',
     },
     {
         name: 'Didrik',
@@ -35,19 +25,9 @@ const values = [
         img: './img/joel.png',
     },
     {
-        name: 'Julie',
-        thumb: './img/julie-thumb.jpg',
-        img: './img/julie.jpg',
-    },
-    {
         name: 'Kent',
         thumb: './img/kent-thumb.jpg',
         img: './img/kent.jpg',
-    },
-    {
-        name: 'Long',
-        thumb: './img/long-thumb.png',
-        img: './img/long.png',
     },
     {
         name: 'Mari',
@@ -65,11 +45,6 @@ const values = [
         img: './img/mats.jpg',
     },
     {
-        name: 'Nicolai',
-        thumb: './img/nicolai-thumb.jpg',
-        img: './img/nicolai.jpg',
-    },
-    {
         name: 'Oystein',
         thumb: './img/oystein-thumb.png',
         img: './img/oystein.png',
@@ -78,12 +53,7 @@ const values = [
         name: 'Sara',
         thumb: './img/sara-thumb.jpg',
         img: './img/sara.jpg',
-    },
-    {
-        name: 'Simen',
-        thumb: './img/simen-thumb.jpg',
-        img: './img/simen.jpg',
-    },
+    }
 ]
 
 
