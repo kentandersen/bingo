@@ -12,7 +12,7 @@
         }
     
         body {
-            background-color: #3f3f3f;
+            background-color: #656782;
             display: grid;
             min-height: 100vh;
             margin: 0;
@@ -38,17 +38,10 @@
             font-family: Futura, Arial, sans-serif;
             text-align: center;
             font-size: 3rem;
+            height: 1.25em;
             color: #fff;
             margin-top: 1rem;
             text-transform: uppercase;
-        }
-
-        #draw {
-            border: 0;
-            background-color: #808080;
-            padding: 0.5rem 1rem;
-            display: block;
-            margin: 1rem auto 0;
         }
     </style>
 </head>
@@ -59,7 +52,6 @@
             <canvas id="pixelate"></canvas>
             <figcaption id="name"></figcaption>
         </figure>
-        <button id="draw">Trekk</button>
     </main>
 
     <script type="module">
@@ -67,7 +59,6 @@
         import createPixelation from './src/Pixelate.js'
         import shuffle from './src/shuffelLetters.js'
         
-        const drawButtonEl = document.getElementById("draw")
         const pixelateEl = document.getElementById("pixelate");
         const nameEl = document.getElementById('name');
         
@@ -79,9 +70,15 @@
             stop()
         }
         
-        drawButtonEl.addEventListener('click', () => {
+        let lock = false
+        window.addEventListener('keyup', async (event) => {
+            if (lock || event.code !== 'Space') return
+            event.preventDefault()
+
+            lock = true
             const randomValue = getRandomValue()
-            createSuspence(randomValue)
+            await createSuspence(randomValue)
+            lock = false
         });
     </script>
 </body>
