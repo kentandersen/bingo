@@ -55,7 +55,7 @@
     </main>
 
     <script type="module">
-        import values, { getRandomValue } from './values.js'
+        import values, { createGetRandomValue } from './values.js'
         import createPixelation from './src/Pixelate.js'
         import shuffle from './src/shuffelLetters.js'
         
@@ -70,6 +70,8 @@
             stop()
         }
         
+        const getRandomValue = createGetRandomValue()
+
         let lock = false
         window.addEventListener('keyup', async (event) => {
             if (lock || event.code !== 'Space') return

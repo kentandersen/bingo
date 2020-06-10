@@ -56,19 +56,30 @@ const values = [
     }
 ]
 
+function getRandomIndex(pool) {
+    return Math.floor(Math.random() * pool.length);
+}
 
-let pool = values
-export function getRandomValue() {
-    const index = Math.floor(Math.random() * pool.length);
-    const value = pool[index]
+export function getRandomValue(pool = values) {
+    const index = getRandomIndex(pool)
+    return pool[index]
+}
 
-    pool = [ ...pool.slice(0, index), ...pool.slice(index + 1) ]
+export function createGetRandomValue(initialPool = values) {
+    let pool = initialPool
+    return () => {
+        const index = getRandomIndex(pool)
+        const value = pool[index]
 
-    if (!pool.length) {
-        pool = values
+        pool = [ ...pool.slice(0, index), ...pool.slice(index + 1) ]
+console.log(pool.length);
+
+        if (!pool.length) {
+            pool = initialPool
+        }
+
+        return value
     }
-
-    return value
 }
 
 export default values
