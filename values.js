@@ -72,7 +72,6 @@ export function createGetRandomValue(initialPool = values) {
         const value = pool[index]
 
         pool = [ ...pool.slice(0, index), ...pool.slice(index + 1) ]
-console.log(pool.length);
 
         if (!pool.length) {
             pool = initialPool
