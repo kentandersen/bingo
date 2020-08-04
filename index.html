@@ -118,6 +118,13 @@
                 <td><input class="square" type="checkbox"/></td>
                 <td><input class="square" type="checkbox"/></td>
             </tr>
+            <tr>
+                <td><input class="square" type="checkbox"/></td>
+                <td><input class="square" type="checkbox"/></td>
+                <td><input class="square" type="checkbox"/></td>
+                <td><input class="square" type="checkbox"/></td>
+                <td><input class="square" type="checkbox"/></td>
+            </tr>
         </table>
     </main>
 
@@ -143,11 +150,11 @@
             }
         }
 
-        function generateBord(width = 5, height = 4) {
+        function generateBord(width = 5, height = 5) {
             return Array(width * height).fill().map(() => getRandomValue())
         }
         
-        function generateChecks(width = 5, height = 4) {
+        function generateChecks(width = 5, height = 5) {
             return Array(width * height).fill().map(() => false)
         }
 
