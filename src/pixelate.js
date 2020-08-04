@@ -1,3 +1,11 @@
+import values from '../values.js'
+
+// preload
+values.forEach(({ img: imgSrc }) => {
+    const img = new Image()
+    img.src = imgSrc
+})
+
 export default function createPixelation(canvas) {
     const ctx = canvas.getContext('2d');
     
